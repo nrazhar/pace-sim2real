@@ -35,6 +35,7 @@ from torch import pi
 
 import pace_sim2real.tasks  # noqa: F401
 from pace_sim2real.utils.paths import project_root
+from pace_sim2real.optim import CMAESOptimizer
 
 IDENTIFIED_JOINTS = [
     "LF_HAA",
@@ -64,7 +65,12 @@ def main():
     # print info (this is vectorized environment)
     print(f"[INFO]: Gym observation space: {env.observation_space}")
     print(f"[INFO]: Gym action space: {env.action_space}")
-    # TODO: adjust parameters during runtime
+
+    opt = CMAESOptimizer(
+        initial_params=None,
+        sigma=0.5,
+        population_size=env.unwrapped.num_envs
+    )  # TODO: implement optimization loop
 
     articulation = env.unwrapped.scene["robot"]
     joint_names = IDENTIFIED_JOINTS

@@ -64,8 +64,6 @@ def main():
     # print info (this is vectorized environment)
     print(f"[INFO]: Gym observation space: {env.observation_space}")
     print(f"[INFO]: Gym action space: {env.action_space}")
-    # TODO: adjust parameters during runtime
-    # TODO: change default position and reset
     # reset environment
 
     articulation = env.unwrapped.scene["robot"]
