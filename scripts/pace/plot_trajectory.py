@@ -107,7 +107,8 @@ if plot_score:
     plt.xlim(0, params_num)
     # plt.ylim(0, None)
     plt.grid()
-    plt.show()
+    plt.savefig(log_dir / "score.png")
+    plt.close()
 
 if plot_trajectory:
     for i in range(len(joint_order)):
@@ -121,6 +122,7 @@ if plot_trajectory:
         plt.legend()
         plt.grid()
         plt.tight_layout()
-        plt.show()
+        plt.savefig(log_dir / f"{joint_order[i]}_trajectory.png")
+        plt.close()
 
 print("Plotting complete.")

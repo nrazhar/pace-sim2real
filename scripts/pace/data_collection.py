@@ -151,6 +151,10 @@ def main():
     }, data_dir / "chirp_data.pt")
 
     import matplotlib.pyplot as plt
+    from datetime import datetime
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    print(f"[INFO]: Saving plots to {data_dir} with timestamp {timestamp}")
 
     for i in range(len(joint_ids)):
         plt.figure()
@@ -162,7 +166,10 @@ def main():
         plt.grid()
         plt.legend()
         plt.tight_layout()
-        plt.show()
+        # save the plot
+        plot_path = data_dir / f"chirp_plot_{timestamp}_{joint_order[i]}.png"
+        plt.savefig(plot_path)
+        plt.close()
 
 
 if __name__ == "__main__":
