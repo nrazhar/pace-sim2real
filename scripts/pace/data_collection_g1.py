@@ -85,17 +85,18 @@ def main():
         # Ref: G1_29DOF_CFG uses Armature=0.03, Damping=2.5 for Hips
         a_val = 0.03
         d_val = 2.5
-        f_val = 0.1
+        f_val = 0.0
         b_val = 0.0
         
         if "knee" in name:
             # Ref: G1_29DOF_CFG uses Damping=5.0 for Knees
             d_val = 5.0
-        elif "ankle" in name:
-            # Ref: G1_29DOF_CFG uses Damping ~0.1-0.2 for Ankles
+        elif "ankle_pitch" in name:
+            # Ref: G1_29DOF_CFG uses Damping=0.2 for Ankle Pitch
             d_val = 0.2
-            # Ankle friction likely lower
-            f_val = 0.05
+        elif "ankle_roll" in name:
+            # Ref: G1_29DOF_CFG uses Damping=0.1 for Ankle Roll
+            d_val = 0.1
         elif "waist" in name:
             # Ref: G1_29DOF_CFG uses Damping=5.0, Armature=0.001 for Waist
             d_val = 5.0
@@ -108,7 +109,6 @@ def main():
             # Ref: G1_29DOF_CFG uses Damping=2.0, Armature=0.001 for Hands
             d_val = 2.0
             a_val = 0.001
-            f_val = 0.01
             
         armature_vals.append(a_val)
         damping_vals.append(d_val)

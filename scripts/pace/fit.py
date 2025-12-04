@@ -14,6 +14,7 @@ from isaaclab.app import AppLauncher
 parser = argparse.ArgumentParser(description="Pace agent for Isaac Lab environments.")
 parser.add_argument("--num_envs", type=int, default=4096, help="Number of environments to simulate.")
 parser.add_argument("--task", type=str, default="Isaac-Pace-Anymal-D-v0", help="Name of the task.")
+parser.add_argument("--data_file", type=str, default=None, help="Path to the data file.")
 # append AppLauncher cli args
 AppLauncher.add_app_launcher_args(parser)
 # parse the arguments
@@ -55,7 +56,11 @@ def main():
     joint_order = env_cfg.sim2real.joint_order
     sim_joint_ids = torch.tensor([articulation.joint_names.index(name) for name in joint_order], device=env.unwrapped.device)
 
-    data_file = project_root() / "data" / env_cfg.sim2real.data_dir
+    if args_cli.data_file:
+        data_file = args_cli.data_file
+    else:
+        data_file = project_root() / "data" / env_cfg.sim2real.data_dir
+    
     log_dir = project_root() / "logs" / "pace" / env_cfg.sim2real.robot_name
 
     data = torch.load(data_file)
