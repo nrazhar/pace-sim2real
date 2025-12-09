@@ -114,7 +114,13 @@ class G1PaceSceneCfg(PaceSim2realSceneCfg):
         prim_path="{ENV_REGEX_NS}/Robot",
         init_state=ArticulationCfg.InitialStateCfg(
             pos=(0.0, 0.0, 1.0),
-            rot=(0.7071, 0, 0, 0.7071)
+            rot=(0.7071, 0, 0, 0.7071),
+            joint_pos={
+                ".*_hip_pitch_joint": -0.10,
+                ".*_knee_joint": 0.30,
+                ".*_ankle_pitch_joint": -0.20,
+            },
+            joint_vel={".*": 0.0},
         ),
         actuators={
             "legs": G1_LEGS_PACE_ACTUATOR_CFG,
