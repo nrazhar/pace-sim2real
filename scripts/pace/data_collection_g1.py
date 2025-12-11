@@ -233,7 +233,10 @@ def main():
             # Limits: L[-0.5, 2.9], R[-2.9, 0.5] (approx)
             # We want to bias outwards (Abduction)
             scale = 0.2
-            joint_bias = 0.5 
+            if is_right:
+                joint_bias = -0.1
+            else:
+                joint_bias = 0.1
         elif "hip_pitch" in name:
             # Limits: ~[-2.5, 2.8]
             scale = 0.15  # Reduced from 0.3 (High overshoot observed)
@@ -241,10 +244,7 @@ def main():
             # Limits: [-0.09, 2.88]
             # Must stay positive.
             scale = 0.2  # Reduced from 0.3
-            if is_right:
-                joint_bias = -1.5
-            else:
-                joint_bias = 1.5
+            joint_bias = 1.0
         elif "ankle_pitch" in name:
             # Limits: ~[-0.8, 0.5]
             scale = 0.15  # Reduced from 0.25
@@ -271,7 +271,7 @@ def main():
         elif "elbow" in name:
             # Limits: [-1.0, 2.1]
             scale = 0.3
-            joint_bias = 0.5
+            joint_bias = 0.0
         elif "wrist" in name:
             # Limits: ~[-1.5, 1.5] usually
             scale = 0.2
@@ -287,7 +287,7 @@ def main():
     trajectory_bias = torch.tensor(trajectory_bias, device=env.unwrapped.device)
     trajectory_scale = torch.tensor(trajectory_scale, device=env.unwrapped.device)
     
-    trajectory = (trajectory + trajectory_bias.unsqueeze(0)) * trajectory_directions.unsqueeze(0) * trajectory_scale.unsqueeze(0)
+    trajectory = trajectory * trajectory_directions.unsqueeze(0) * trajectory_scale.unsqueeze(0) + trajectory_bias.unsqueeze(0)
 
     # --- Initialization ---
     # Write initial position for target joints

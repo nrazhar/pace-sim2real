@@ -21,12 +21,15 @@ simulation_app = app_launcher.app
 # Now we can import pxr and other isaac libraries
 from pxr import Usd, UsdPhysics, UsdGeom
 from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR
+from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR
+
 
 def main():
     # Path to G1 USD as defined in unitree.py
     usd_path = f"{ISAAC_NUCLEUS_DIR}/Robots/Unitree/G1/g1.usd"
+    # usd_path = f"{ISAACLAB_NUCLEUS_DIR}/Robots/ANYbotics/ANYmal-D/anymal_d.usd"
 
-    usd_path = "/home/azhar/ws/n_robotics_robot_description/mujoco_robot/mujoco_robot.usd"
+    # usd_path = "/home/azhar/ws/n_robotics_robot_description/mujoco_robot/mujoco_robot.usd"
 
     print(f"[INFO] Opening USD stage: {usd_path}")
     
