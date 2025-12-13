@@ -29,7 +29,8 @@ def main():
     usd_path = f"{ISAAC_NUCLEUS_DIR}/Robots/Unitree/G1/g1.usd"
     # usd_path = f"{ISAACLAB_NUCLEUS_DIR}/Robots/ANYbotics/ANYmal-D/anymal_d.usd"
 
-    # usd_path = "/home/azhar/ws/n_robotics_robot_description/mujoco_robot/mujoco_robot.usd"
+    usd_path = "/home/azhar/ws/n_robotics_robot_description/mujoco_robot/mujoco_robot.usd"
+    usd_path = "/home/azhar/ws/neura_4ne1_g3_2/4ne1.usd"
 
     print(f"[INFO] Opening USD stage: {usd_path}")
     

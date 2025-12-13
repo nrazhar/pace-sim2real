@@ -97,8 +97,11 @@ def main():
         with torch.inference_mode():
             # compute zero actions
             opt.tell(env.unwrapped.scene.articulations["robot"].data.joint_pos[:, sim_joint_ids], measured_dof_pos[counter, :].unsqueeze(0).repeat(env.unwrapped.num_envs, 1))
-            actions = torch.zeros(env.action_space.shape, device=env.unwrapped.device)
-            actions[:, sim_joint_ids] = target_dof_pos[counter, :].unsqueeze(0).repeat(env.unwrapped.num_envs, 1)
+            # actions = torch.zeros(env.action_space.shape, device=env.unwrapped.device)
+            # actions[:, sim_joint_ids] = target_dof_pos[counter, :].unsqueeze(0).repeat(env.unwrapped.num_envs, 1)
+            actions = target_dof_pos[counter, :].unsqueeze(0).repeat(env.unwrapped.num_envs, 1)
+
+            
             # apply actions
             env.step(actions)
             counter += 1

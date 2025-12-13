@@ -124,6 +124,9 @@ class CMAESOptimizer:
                 all_idx = torch.arange(joint_ids.shape[0], device=joint_ids.device)
                 drive_indices = all_idx[drive_indices]
             comparison_matrix = (joint_ids.unsqueeze(1) == drive_indices.unsqueeze(0))
+            mask = comparison_matrix.any(dim=0)
+            if not mask.any():
+                continue
             drive_joint_idx = torch.argmax(comparison_matrix.int(), dim=0)
             articulation.actuators[drive_type].update_encoder_bias(self.sim_params[:, self.bias_idx][:, drive_joint_idx])
             articulation.actuators[drive_type].update_time_lags(self.sim_params[:, self.delay_idx].to(torch.int))

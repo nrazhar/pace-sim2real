@@ -21,3 +21,30 @@ gym.register(
         "env_cfg_entry_point": f"{__name__}.pace.g1_pace_env_cfg:G1PaceEnvCfg"
     },
 )
+
+gym.register(
+    id="Isaac-Pace-Hoku-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.pace.hoku_pace_env_cfg:HokuPaceEnvCfg"
+    },
+)
+
+gym.register(
+    id="Isaac-Pace-Hoku-Flat-Left-Ankle-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.pace.hoku_flat_left_ankle_env_cfg:HokuFlatLeftAnklePaceEnvCfg"
+    },
+)
+
+gym.register(
+    id="Isaac-Pace-Neura-4NE1-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    disable_env_checker=True,
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.pace.4ne1_pace_env_cfg:Neura4NE1PaceEnvCfg"
+    },
+)
